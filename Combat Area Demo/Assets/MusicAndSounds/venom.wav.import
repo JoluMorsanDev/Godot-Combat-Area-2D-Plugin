@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/venom.wav-5188158c5a9b633614da706605d1ae7f.sample"
+
+[deps]
+
+source_file="res://Assets/MusicAndSounds/venom.wav"
+dest_files=[ "res://.import/venom.wav-5188158c5a9b633614da706605d1ae7f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
