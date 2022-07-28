@@ -1,2 +1,9 @@
 # Godot-Combat-Area-2D-Plugin
 A plugin which adds a few nodes that may help you saving time.
+There is a demo game integrated, so you can learn in practice how to use it
+The CombatArea node extends from Area2D and it has all of its properties, but also you can set:
+-Area type: Depending of its value it has one or other properties:
+    -Body: The basic type of area, it's used to be the hitbox of the characters, and the one you should use the damaged, heal, and item signals.
+    -Heal: With this area the float heal property is used, when it collides with a Body CombatArea, makes it call its signal "heal", which must be a function with two                arguments, a heal argument (the heal amount setted with heal property) and an effect argument (a string that if you want a custom effect and is setted in                the effect string property).
+    -Damage: With this area the float damage and float potency properties is used, when it collides with a Body CombatArea, makes it call its signal "damage", which must              be a function with three arguments, a damage argument (the damage amount setted with damage property), a potency argument (the potency amount setted with                  potency property, just if you want to add knockback, screenshake, or anything that would be related with potency) and an effect argument (a string that if                you want a custom effect and is setted in the effect string property).
+    -Item: With this area the string item property is used, when it collides with a Body CombatArea, makes it call its signal "item", which must be a function with two              arguments, an item argument (the item setted with item property) and an effect argument (a string that if you want a custom effect and is setted in the effect              string property).
