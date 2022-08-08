@@ -67,6 +67,8 @@ func heal_func(heal,effect):
 func _process(delta):
 	if area_type == "":
 		area_type = "Body"
+	monitorable = active
+	monitoring = active
 	add_to_group("combat_area")
 	change_groups()
 	change_to_template()
