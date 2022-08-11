@@ -12,6 +12,8 @@ export var heal = float(0)
 export var potency = float(0)
 export var item = ""
 export var effect = ""
+export var rotated_knockback = true
+export(Vector2) var knocback_dir = Vector2(0,0)
 export var team = int(1)
 
 
@@ -42,26 +44,26 @@ func collide(area:Area2D):
 		if area_type != "Body" and area.is_in_group("combat_area_body"):
 			if area.active:
 				if area_type == "Damage" and area.team != team:
-					area.damage_func(damage,potency,effect)
+					area.damage_func(damage,potency,effect,knocback_dir,rotated_knockback)
 					if destroy_on_collision:
 						queue_free()
 				if area_type == "Heal" and area.team == team:
-					area.heal_func(heal,effect)
+					area.heal_func(heal,effect,knocback_dir,rotated_knockback)
 					if destroy_on_collision:
 						queue_free()
 				if area_type == "Item" and area.team == team:
-					area.item_func(item,effect)
+					area.item_func(item,effect,knocback_dir,rotated_knockback)
 					if destroy_on_collision:
 						queue_free()
 
-func item_func(item,effect):
-	emit_signal("item_signal",item,effect)
+func item_func(item,effect,knocback_dir,rotated_knockback):
+	emit_signal("item_signal",item,effect,knocback_dir,rotated_knockback)
 
-func damage_func(damage,potency,effect):
-	emit_signal("damage_signal",damage,potency,effect)
+func damage_func(damage,potency,effect,knocback_dir,rotated_knockback):
+	emit_signal("damage_signal",damage,potency,effect,knocback_dir,rotated_knockback)
 
-func heal_func(heal,effect):
-	emit_signal("heal_signal",heal,effect)
+func heal_func(heal,effect,knocback_dir,rotated_knockback):
+	emit_signal("heal_signal",heal,effect,knocback_dir,rotated_knockback)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -100,6 +102,11 @@ func print_info():
 			print("Effect: " + str(effect))
 		else:
 			print("No effect")
+		print("Knockback dir: " + str(knocback_dir))
+		if rotated_knockback:
+			print("Rotated Knockback")
+		else:
+			print("Fixed Knockback")
 		if destroy_on_collision:
 			print("Will destroy when collide")
 		match area_type:

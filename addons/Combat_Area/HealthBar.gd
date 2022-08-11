@@ -10,6 +10,10 @@ export var event_2 = false
 export var event_2_hp = float()
 export var event_3 = false
 export var event_3_hp = float()
+export var label_name = ""
+export var inverse_label = false
+export var percentaage_label = false
+
 
 signal die
 signal event1
@@ -54,6 +58,18 @@ func change_value(value):
 			emit_signal("event3")
 
 func _process(delta):
+	var lifelabel = get_node_or_null(str(label_name))
+	if lifelabel is Label:
+		if !percentaage_label:
+			if !inverse_label:
+				lifelabel.text = str(hp)
+			else:
+				lifelabel.text = str(total_hp-hp)
+		else:
+			if !inverse_label:
+				lifelabel.text = str((hp*100)/total_hp) + "%"
+			else:
+				lifelabel.text = str(100-((hp*100)/total_hp)) + "%"
 	min_value = 0
 	max_value = total_hp
 	value = hp

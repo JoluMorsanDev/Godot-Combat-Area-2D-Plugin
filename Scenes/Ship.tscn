@@ -58,7 +58,7 @@ template = "Select one in list"
 area_type = "Body"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-modulate = Color( 0, 0, 0.5, 1 )
+modulate = Color( 0, 0, 0.501961, 1 )
 rotation = 1.5708
 shape = SubResource( 1 )
 

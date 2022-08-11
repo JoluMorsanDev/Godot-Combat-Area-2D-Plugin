@@ -46,7 +46,9 @@ func _process(delta):
 	$VisibilityNotifier2D.global_rotation_degrees = 0
 
 # warning-ignore:unused_argument
-func _on_Hitbox_damage_signal(damage,potency,effect):
+# warning-ignore:unused_argument
+# warning-ignore:unused_argument
+func _on_Hitbox_damage_signal(damage,potency,effect,k,r):
 	if effect == "laser":
 		get_tree().call_group("camerashake","shake",100,.3 * potency,75,Color.white,false)
 	$DieSound.play()

@@ -57,7 +57,9 @@ func move(delta):
 	global_position.x = clamp(global_position.x, 0, get_viewport_rect().size.x)
 	global_position.y = clamp(global_position.y, 0, get_viewport_rect().size.y)
 
-func damage(damage,potency,effect):
+
+# warning-ignore:unused_argument
+func damage(damage,potency,effect,k,r):
 	$Hitbox.active = false
 	$InmunityTimer.start()
 	match effect:
@@ -65,17 +67,19 @@ func damage(damage,potency,effect):
 			$Sounds/DamageSound.play()
 			$Ui/HealthBar.hp -= damage
 			get_tree().call_group("camerashake","shake",100,.5 * potency,100,Color.white)
+			position += 3 * k
 		"fire":
 			$Sounds/DamageSoundFire.play()
 			if rand_range(0,1) > 0.5:
 				$Ui/HealthBar.hp -= damage + 1
 			else:
 				$Ui/HealthBar.hp -= damage + 2
-			get_tree().call_group("camerashake","shake",100,.5 * potency,150,Color.orangered)
+			get_tree().call_group("camerashake","shake",200,.5 * potency,200,Color.orangered)
 			$Sprite.modulate = Color.firebrick
 			state = "fire"
 			$EffectTimer.wait_time = .5
 			$EffectTimer.start()
+			position += 3 * k
 		"ice":
 			$Sounds/DamageSoundIce.play()
 			$Ui/HealthBar.hp -= damage
@@ -85,6 +89,7 @@ func damage(damage,potency,effect):
 			state = "ice"
 			$EffectTimer.wait_time = 5
 			$EffectTimer.start()
+			position += 3 * k
 		"venom":
 			if state == "ice":
 				speed = 750
@@ -96,6 +101,7 @@ func damage(damage,potency,effect):
 			randomize()
 			$EffectTimer.wait_time = int(rand_range(2,6))
 			$EffectTimer.start()
+			position += 3 * k
 
 func _on_HealthBar_die():
 	$Sounds/DeathSound.play()
@@ -112,7 +118,9 @@ func _on_InmunityTimer_timeout():
 	$Sprite.self_modulate.a = 1
 
 # warning-ignore:unused_argument
-func _on_Hitbox_item_signal(item,effect):
+# warning-ignore:unused_argument
+# warning-ignore:unused_argument
+func _on_Hitbox_item_signal(item,effect,k,r):
 	match item:
 		"coin":
 			emit_signal("coin",3)
@@ -130,7 +138,7 @@ func _on_EffectTimer_timeout():
 			speed = 750
 		"venom":
 			state = "def"
-			damage(1,1,"")
+			damage(1,1,"",Vector2(0,0),true)
 	$Sprite.modulate = Color.white
 
 
@@ -140,7 +148,9 @@ func _on_DieTimer_timeout():
 
 
 # warning-ignore:unused_argument
-func heal(heal,effect):
+# warning-ignore:unused_argument
+# warning-ignore:unused_argument
+func heal(heal,effect,k,r):
 	$Sounds/HealSound.play()
 	$Ui/HealthBar.hp += heal
 	get_tree().call_group("camerashake","shake",70,.2,70,Color.limegreen)
