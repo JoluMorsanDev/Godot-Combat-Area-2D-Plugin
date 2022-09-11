@@ -22,9 +22,9 @@ export var print_combat_info = false
 #export var reload_propieties_devs = false
 
 
-signal damage_signal
-signal heal_signal
-signal item_signal
+signal damage_signal(damage,potency,effect,knocback_dir,rotated_knockback)
+signal heal_signal(heal,effect,knocback_dir,rotated_knockback)
+signal item_signal(item,effect,knocback_dir,rotated_knockback)
 
 
 func _enter_tree():
